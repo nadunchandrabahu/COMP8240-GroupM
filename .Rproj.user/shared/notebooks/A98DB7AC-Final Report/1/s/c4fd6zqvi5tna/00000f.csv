@@ -1,0 +1,35 @@
+"0","import subprocess"
+"0","subprocess.run([""pip"",""install"",""transformers""])"
+"2","Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+  File ""[90m]8;line = 548;file://C:\Users\nadun\AppData\Local\Programs\Python\Python312\Lib\subprocess.pyC:\Users\nadun\AppData\Local\Programs\Python\PYTHON~2\Lib\subprocess.py]8;;[39m"", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 15;file://C:\Users\nadun\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\subprocess.pyC:\Users\nadun\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\subprocess.py]8;;[39m"", line 15, in __init__
+    return og_Popen__init__(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 992;file://C:\Users\nadun\AppData\Local\Programs\Python\Python312\Lib\subprocess.pyC:\Users\nadun\AppData\Local\Programs\Python\PYTHON~2\Lib\subprocess.py]8;;[39m"", line 992, in __init__
+    errread, errwrite) = self._get_handles(stdin, stdout, stderr)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 1368;file://C:\Users\nadun\AppData\Local\Programs\Python\Python312\Lib\subprocess.pyC:\Users\nadun\AppData\Local\Programs\Python\PYTHON~2\Lib\subprocess.py]8;;[39m"", line 1368, in _get_handles
+    c2pwrite = _winapi.GetStdHandle(_winapi.STD_OUTPUT_HANDLE)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [WinError 6] The handle is invalid
+"
+"0","subprocess.run([""pip"",""install"",""torch""])"
+"2","Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+  File ""[90m]8;line = 548;file://C:\Users\nadun\AppData\Local\Programs\Python\Python312\Lib\subprocess.pyC:\Users\nadun\AppData\Local\Programs\Python\PYTHON~2\Lib\subprocess.py]8;;[39m"", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 15;file://C:\Users\nadun\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\subprocess.pyC:\Users\nadun\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\subprocess.py]8;;[39m"", line 15, in __init__
+    return og_Popen__init__(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 992;file://C:\Users\nadun\AppData\Local\Programs\Python\Python312\Lib\subprocess.pyC:\Users\nadun\AppData\Local\Programs\Python\PYTHON~2\Lib\subprocess.py]8;;[39m"", line 992, in __init__
+    errread, errwrite) = self._get_handles(stdin, stdout, stderr)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 1368;file://C:\Users\nadun\AppData\Local\Programs\Python\Python312\Lib\subprocess.pyC:\Users\nadun\AppData\Local\Programs\Python\PYTHON~2\Lib\subprocess.py]8;;[39m"", line 1368, in _get_handles
+    c2pwrite = _winapi.GetStdHandle(_winapi.STD_OUTPUT_HANDLE)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [WinError 6] The handle is invalid
+"

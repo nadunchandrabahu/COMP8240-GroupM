@@ -1,0 +1,73 @@
+---
+title: "Replication of DistilBERT evaluation - Group M"
+author: "Tai Ho, Nadun Chandrabahu, Muhammad Umer Bashir, Thanushreyas "
+output: 
+  pdf_document:
+    number_sections: true
+    latex_engine: xelatex 
+    keep_tex: true 
+fontsize: 11pt
+geometry: a4paper 
+---
+
+# Replication of DistilBERT evaluation
+
+## Introduction
+
+Describe the source paper and talk about our project justification again.
+
+Add a footnote to the original paper: <https://arxiv.org/abs/1910.01108> (Sanh et al, 2019)
+
+Sanh, V., Debut, L., Chaumond, J., & Wolf, T. (2019). DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter (Version 4). arXiv. <https://doi.org/10.48550/ARXIV.1910.01108>
+
+## Evaluation Datasets
+
+We'll have a look at the benchmark datasets GLUE, IMdb, SQuAD, we can also talk about how we can use
+
+## Replication of Evaluation Results
+
+Show the coding and use the model on the datasets used in the paper such as GLUE benchmark, IMdb, SQuAD. Calculate the metrics and show how close they are to the ones in the paper
+
+Include link to our github repo. And how we can replicate. Maybe we can include a notebook file running the evaluation on the datasets. We're using python version 3.12.7 to install transformers library so we can get the model. Also need to install pytorch
+
+```{python, install_libraries, include=FALSE}
+import subprocess
+subprocess.run(["pip","install","transformers"])
+subprocess.run(["pip","install","torch"])
+#only install for first time run, use above when knitting:
+#!pip install transformers
+#!pip install torch
+```
+
+We can run python code as follows, calculate metrics and report on them. Let's have a discussion about the results on the datasets used in the paper in this section as well.
+
+```{python, load_libraries}
+from transformers import pipeline
+print("Hello GroupM!")
+```
+
+## New data construction
+
+Each member can talk about how they constructed their data.
+
+### Tai Ho's dataset
+
+Talk about how you created your dataset, and what your goal /context of the dataset is.
+
+### Nadun Chandrahu's dataset
+
+I'll be talking about a question and answer dataset, similar to SQuAD, I can manually anotate whether the answers are correct or not.
+
+### Evaluation using new datasets
+
+### Tai Ho's dataset
+
+Talk about how your dataset evaluates with the model
+
+### Nadun Chandrabahu's dataset
+
+Talk about how your dataset evaluates with the model
+
+## Reflections
+
+Each of us can write a paragraph about our reflections on the project.
