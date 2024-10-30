@@ -1,4 +1,0 @@
-"0","from transformers import pipeline"
-"0","print(""Hello GroupM!"")"
-"1","Hello GroupM!
-"
