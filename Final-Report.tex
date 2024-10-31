@@ -103,31 +103,78 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={Replication of DistilBERT evaluation results},
-  pdfauthor={Group M - Tai Ho, Nadun Chandrabahu, Muhammad Umer Bashir, Thanushreyas},
+  pdfauthor={Group M - Nadun Chandrabahu, Tai Ho, Muhammad Umer Bashir, Thanushreyas},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{Replication of DistilBERT evaluation results}
-\author{Group M - Tai Ho, Nadun Chandrabahu, Muhammad Umer Bashir,
+\author{Group M - Nadun Chandrabahu, Tai Ho, Muhammad Umer Bashir,
 Thanushreyas}
-\date{1/11/2024}
+\date{November 1, 2024}
 
 \begin{document}
 \maketitle
 
-\section{}\label{section}
+\section{Introduction}\label{introduction}
 
-\subsection{Introduction}\label{introduction}
+The paper, (Sanh et al, 2019)\footnote{(Sanh et al, 2019:
+  \url{https://arxiv.org/pdf/1910.01108})} ``DistilBERT, a distilled
+version of BERT: smaller, faster, cheaper and lighter'', we selected for
+this project presents a method for training a more compact
+general-purpose language representation model called DistilBERT, which
+is a streamlined version of the larger BERT model (Bidirectional Encoder
+Representations from Transformers). Although BERT is highly effective
+for Natural Language Processing (NLP) tasks, its size and complexity can
+lead to slower inference times, particularly in on-the-edge or
+resource-constrained environments, potentially impacting user
+experience. This paper aims to pre-train the DistilBERT model to enhance
+inference performance by reducing both its size and inference time while
+maintaining accuracy. According to the paper, DistilBERT achieves a 40\%
+reduction in model size, preserves 97\% of BERT's language understanding
+capabilities, and improves processing speed by 60\%.
 
-Describe the source paper and talk about our project justification
-again.
+\section{Project Justification}\label{project-justification}
 
-Add a footnote to the original paper:
-\url{https://arxiv.org/abs/1910.01108} (Sanh et al, 2019)
+In this project, we will not replicate the transfer learning or model
+training processes of DistilBERT. Instead, we aim to reproduce the
+evaluation metrics shown in Tables 1 and 2 on page 3 of the referenced
+research paper, across various datasets and downstream tasks. This will
+allow us to assess DistilBERT's performance both on the datasets from
+the paper and on some of our own datasets.
 
-Sanh, V., Debut, L., Chaumond, J., \& Wolf, T. (2019). DistilBERT, a
-distilled version of BERT: smaller, faster, cheaper and lighter (Version
-4). arXiv. \url{https://doi.org/10.48550/ARXIV.1910.01108}
+The DistilBERT model is available for use through Hugging Face's
+transformers library (Wolf et al., 2019). In the original research,
+DistilBERT was evaluated using three datasets: the GLUE (General
+Language Understanding and Evaluation) benchmark \footnote{GLUE
+  Benchmark: \url{https://gluebenchmark.com/}}, which includes nine
+sentence-pair language understanding tasks; IMDb \footnote{IMDb dataset:
+  \url{https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews}},
+used for sentiment classification of user movie reviews; and SQuAD
+\footnote{SQuAD v1.1 dataset:
+  \url{https://rajpurkar.github.io/SQuAD-explorer/}} (Stanford Question
+Answering Dataset), designed for question-answering based on a provided
+passage.
+
+We will run some Python scripts to make predictions on the data with the
+DistilBERT model and calculate various metrics: the average score across
+the nine GLUE benchmark tasks, test accuracy on the IMDb dataset, and
+the Exact Match (EM) and F1 score on the SQuAD task. These metrics are
+reported in Tables 1 and 2 of the research paper and it is the aim of
+this project to replicate these results. Each group member will also
+show the metrics using new data sources to perform similar NLP tasks
+with DistilBERT.
+
+\section{DistilBERT}\label{distilbert}
+
+DistilBERT is a student model of BERT
+
+The trained model is already available through a python library called
+transformers which is provided by hugging face.com (add reference).
+There are a few variations of the model available as well depending on
+what kind of data the model was trained on.
+
+online link to SQuAD data set:
+\href{https://github.com/rajpurkar/SQuAD-explorer/blob/master/dataset/dev-v1.1.json}{https://github.com/rajpurkar/SQuAD-explorer/blob/master/dataset/dev-v1.1.jsonhttps://github.com/rajpurkar/SQuAD-explorer/blob/master/dataset/dev-v1.1.json}
 
 \subsection{Evaluation Datasets}\label{evaluation-datasets}
 
@@ -187,5 +234,22 @@ Talk about how your dataset evaluates with the model
 \subsection{Reflections}\label{reflections}
 
 Each of us can write a paragraph about our reflections on the project.
+
+\section{References}\label{references}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Sanh, V., Debut, L., Chaumond, J., \& Wolf, T. (2019). DistilBERT, a
+  distilled version of BERT: smaller, faster, cheaper and lighter.
+  \url{https://doi.org/10.48550/arXiv.1910.01108}
+\item
+  Wolf, T., Debut, L., Sanh, V., Chaumond, J., Delangue, C., Moi, A.,
+  Cistac, P., Rault, T., Louf, R., Funtowicz, M., Davison, J., Shleifer,
+  S., Platen, P. V., M, C., Jernite, Y., Plu, J., Xu, C., Scao, T. L.,
+  Gugger, S., \ldots{} Drame, M. (2021). HuggingFace's Transformers:
+  State-of-the-art Natural Language Processing. Webology.
+  \url{https://doi.org/10.48550/arXiv.1910.03771}
+\end{enumerate}
 
 \end{document}

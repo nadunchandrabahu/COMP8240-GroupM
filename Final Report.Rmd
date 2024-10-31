@@ -1,7 +1,7 @@
 ---
 title: "Replication of DistilBERT evaluation results"
-author: "Group M - Tai Ho, Nadun Chandrabahu, Muhammad Umer Bashir, Thanushreyas"
-date: "1/11/2024"
+author: "Group M - Nadun Chandrabahu, Tai Ho, Muhammad Umer Bashir, Thanushreyas"
+date: "November 1, 2024"
 output: 
   pdf_document:
     number_sections: true
@@ -11,17 +11,24 @@ fontsize: 11pt
 geometry: a4paper 
 ---
 
-# 
-
 # Introduction
 
-In this paper we will attempt to reproduce part of the research paper titled "DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter. Specifically we are attempting to reproduce the evaluation results on how well the model, DistilBERT performs on datasets including: GLUE (General Language and Evaluation) benchmark, IMDb (Internet Movie Database) dataset for sentiment classification and SQuAD (Stanford Question Answering Dataset) for question answering tasks.
 
-Describe the source paper and talk about our project justification again.
 
-Add a footnote to the original paper: <https://arxiv.org/abs/1910.01108> (Sanh et al, 2019)
+The paper, (Sanh et al, 2019)[^1] "DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter", we selected for this project presents a method for training a more compact general-purpose language representation model called DistilBERT, which is a streamlined version of the larger BERT model (Bidirectional Encoder Representations from Transformers). Although BERT is highly effective for Natural Language Processing (NLP) tasks, its size and complexity can lead to slower inference times, particularly in on-the-edge or resource-constrained environments, potentially impacting user experience. This paper aims to pre-train the DistilBERT model to enhance inference performance by reducing both its size and inference time while maintaining accuracy. According to the paper, DistilBERT achieves a 40% reduction in model size, preserves 97% of BERT's language understanding capabilities, and improves processing speed by 60%.
 
-Sanh, V., Debut, L., Chaumond, J., & Wolf, T. (2019). DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter (Version 4). arXiv. <https://doi.org/10.48550/ARXIV.1910.01108>
+[^1]: (Sanh et al, 2019: <https://arxiv.org/pdf/1910.01108>)
+[^2]: GLUE Benchmark: https://gluebenchmark.com/
+[^3]: IMDb dataset: https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews
+[^4]: SQuAD v1.1 dataset: https://rajpurkar.github.io/SQuAD-explorer/
+
+# Project Justification
+
+In this project, we will not replicate the transfer learning or model training processes of DistilBERT. Instead, we aim to reproduce the evaluation metrics shown in Tables 1 and 2 on page 3 of the referenced research paper, across various datasets and downstream tasks. This will allow us to assess DistilBERT's performance both on the datasets from the paper and on some of our own datasets.
+
+The DistilBERT model is available for use through Hugging Face's transformers library (Wolf et al., 2019). In the original research, DistilBERT was evaluated using three datasets: the GLUE (General Language Understanding and Evaluation) benchmark [^2], which includes nine sentence-pair language understanding tasks; IMDb [^3], used for sentiment classification of user movie reviews; and SQuAD [^4] (Stanford Question Answering Dataset), designed for question-answering based on a provided passage.
+
+We will run some Python scripts to make predictions on the data with the DistilBERT model and calculate various metrics: the average score across the nine GLUE benchmark tasks, test accuracy on the IMDb dataset, and the Exact Match (EM) and F1 score on the SQuAD task. These metrics are reported in Tables 1 and 2 of the research paper and it is the aim of this project to replicate these results. Each group member will also show the metrics using new data sources to perform similar NLP tasks with DistilBERT.
 
 # DistilBERT
 
@@ -82,3 +89,9 @@ Talk about how your dataset evaluates with the model
 ## Reflections
 
 Each of us can write a paragraph about our reflections on the project.
+
+# References
+
+1.  Sanh, V., Debut, L., Chaumond, J., & Wolf, T. (2019). DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter. <https://doi.org/10.48550/arXiv.1910.01108>
+
+2.  Wolf, T., Debut, L., Sanh, V., Chaumond, J., Delangue, C., Moi, A., Cistac, P., Rault, T., Louf, R., Funtowicz, M., Davison, J., Shleifer, S., Platen, P. V., M, C., Jernite, Y., Plu, J., Xu, C., Scao, T. L., Gugger, S., … Drame, M. (2021). HuggingFace's Transformers: State-of-the-art Natural Language Processing. Webology. <https://doi.org/10.48550/arXiv.1910.03771>
