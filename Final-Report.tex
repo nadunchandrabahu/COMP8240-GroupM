@@ -38,6 +38,16 @@
 \makeatother
 \usepackage{xcolor}
 \usepackage[a4paper]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -72,24 +82,25 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\usepackage{bookmark}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
   pdftitle={Replication of DistilBERT evaluation results},
-  pdfauthor={Group M - Nadun Chandrabahu, Tai Ho, Muhammad Umer Bashir, Thanushreyas Appaji},
+  pdfauthor={Group M - Nadun Chandrabahu, Vu Anh Tai Ho, Muhammad Umer Bashir, Thanushreyas Appaji},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{Replication of DistilBERT evaluation results}
-\author{Group M - Nadun Chandrabahu, Tai Ho, Muhammad Umer Bashir,
-Thanushreyas Appaji}
+\author{Group M - Nadun Chandrabahu, Vu Anh Tai Ho, Muhammad Umer
+Bashir, Thanushreyas Appaji}
 \date{November 1, 2024}
 
 \begin{document}
 \maketitle
 
-\section{Introduction}\label{introduction}
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
 
 Reproducible research is vital in machine learning for several reasons.
 Firstly, it enables the validation of results, when research can be
@@ -121,7 +132,8 @@ The source files and collaborative work done on this project is
 available for review on GitHub\footnote{Project on GitHub:
   \url{https://github.com/nadunchandrabahu/COMP8240-GroupM}}.
 
-\section{Project Justification}\label{project-justification}
+\hypertarget{project-justification}{%
+\section{Project Justification}\label{project-justification}}
 
 In this project, we will not replicate the transfer learning or model
 training processes of DistilBERT. Instead, we aim to reproduce the
@@ -183,19 +195,78 @@ DistilBERT & 92.82 & 77.7 & 85.8\\
 \bottomrule
 \end{longtable}
 
-\section{Original Datasets}\label{original-datasets}
+\hypertarget{original-datasets}{%
+\section{Original Datasets}\label{original-datasets}}
 
-\subsection{GLUE Benchmark}\label{glue-benchmark}
+\hypertarget{glue-benchmark}{%
+\subsection{GLUE Benchmark}\label{glue-benchmark}}
+
+GLUE (General Language Understanding Evaluation) contains 9 tasks from
+sentiment understanding to inference to evaluate a Natural Language
+Program capability to comprehend and use linguistic effectively compared
+to a person with common knowledge.
+
+The 9 tasks are divided on 3 group of tasks: Single-Sentence Tasks,
+Similarity and Paraphrase Tasks, and Inference Tasks.
+
+\hypertarget{single-sentence-tasks}{%
+\subsubsection{Single-Sentence Tasks}\label{single-sentence-tasks}}
+
+\emph{CoLa} testing linguistic acceptability determining whether a
+sentence is grammatically acceptable. It is taken from various piece of
+literature and its acceptability is manually marked by verified
+linguists \emph{SST-2} testing sentiment understanding by making
+predictions whether a sentence is positive or negative. It is sourced
+from web movie reviews with binary classification.
+
+\hypertarget{similarity-and-paraprhase-tasks}{%
+\subsubsection{Similarity and Paraprhase
+Tasks}\label{similarity-and-paraprhase-tasks}}
+
+\emph{MRPC} testing paraphrase capability concerning the news. Microsoft
+Research designed this corpus from multiple news sources. It contain
+pair of sentences and the label will be judged whether they are similar
+or not
+
+\emph{STS-B} testing sentence similarity from a collection of sentences
+pair in the domain of news, forums, and image captions. It is a more
+fine-grained test when the label are annotated to a float score from 1 -
+5. Hence, it uses regression and Pearson correlation coefficients to
+evaluate the performance not the usual classification test like the
+others
+
+\emph{QQP} testing paraphrase but this time concerning question. It
+comes from Quora site containing a pair of questions, the task here is
+for NLP model to predict whether the two questions are similar or not
+
+\hypertarget{natural-language-inference-tasks}{%
+\subsubsection{Natural Language Inference
+Tasks}\label{natural-language-inference-tasks}}
+
+\emph{MNLI} containing a premise-hypothesis pair about a wide sources of
+Fiction, Government Report, Telephone Conversation. The tasks is to test
+NLP about generalization to different types of text classified them to
+entailment, contradiction, or neutral
+
+\emph{QNLI} also testing a pair but this time question-answer pair. It
+comes from Stanford drawing Wikipedia site. The NLP model's task is to
+determine whether the answer entail or related to the question
+
+\emph{WNLI} a more challenging test with complex reasoning with data
+from fiction books which can be more ambiguous and require commonsense
+knowledge and context understanding. The NLP model in this test cannot
+simply use cues like pronouns to infer
+
+\emph{RTE} testing textual entailment.The test combines multiple
+versions of a challenge dataset (1,2,3,5 to be exact) coming from news
+article and Wikipedia. It contains two labels of entailment and not
+entailment \#\# IMDb dataset
 
 Describe about the dataset. Whole section 3 (Original Dataset should be
 1/3rd of a page).
 
-\subsection{IMDb dataset}\label{imdb-dataset}
-
-Describe about the dataset. Whole section 3 (Original Dataset should be
-1/3rd of a page).
-
-\subsection{SQuAD dataset}\label{squad-dataset}
+\hypertarget{squad-dataset}{%
+\subsection{SQuAD dataset}\label{squad-dataset}}
 
 The research paper makes use of SQuAD v1.1 development set available on
 GitHub\footnote{SQuAD v1.1 Dev set:
@@ -211,8 +282,9 @@ calculating Exact Match and F-Score.
 ##  ['answer_text', 'answer_start', 'question', 'context', 'subject']
 \end{verbatim}
 
+\hypertarget{replication-of-evaluation-on-datasets}{%
 \section{Replication of Evaluation on
-Datasets}\label{replication-of-evaluation-on-datasets}
+Datasets}\label{replication-of-evaluation-on-datasets}}
 
 We are able to access the DistilBERT model from `transformers' library
 provided by HuggingFace. It is essential to have pyTorch installed
@@ -220,15 +292,66 @@ before using the model to make predictions. The amount of time taken to
 make predictions depends on the size of the dataset, computational power
 and NLP task it tries to achieve.
 
-\subsection{GLUE Benchmark}\label{glue-benchmark-1}
+\hypertarget{glue-benchmark-1}{%
+\subsection{GLUE Benchmark}\label{glue-benchmark-1}}
+
+The GLUE Benchmark reevaluation was initiated by Vu Anh Tai Ho using
+transformers library together with Trainer method to manage model
+training. The datasets are collected directly from HuggingFace's
+datasets library. Then tokenized using DistilBertTokenizerFast. The
+tokenize function are different in the 9 tests just because of the
+different format of label and features (some are called sentence1 and
+sentence2, some are called premise and hypothesis.
+
+The pretrained-model I used are DistilBertForSequenceClassification for
+classification tasks and AutoModelForSequenceClassification for STS-B
+task. For simple training process, I use Training Arguments with
+settings about epochs, batch size, weight decays, or warmups steps.
+
+The next task is to determine the metrics used to evaluate the
+performance of the models. In here I have to use two cases for STS-B
+tasks, as the labels are float number, I have to squeeze the predictions
+before pass them for pearson correlation coefficients computation in the
+metric loaded from datasets library. For other tasks, as label are
+ordinal value, I can use argmax to compute the accorded prediction used
+in the GLUE Benchmark (accuracy, F1 score, or matthew's correlation)
+
+\begin{longtable}[]{@{}lccc@{}}
+\caption{GLUE Benchmark Results}\tabularnewline
+\toprule\noalign{}
+Task & Test\_value & Orig\_value & Differences \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Task & Test\_value & Orig\_value & Differences \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+cola & 0.43 & 0.51 & 0.08 \\
+sst2 & 0.86 & 0.91 & 0.05 \\
+mrpc & 0.81 & 0.88 & 0.07 \\
+qqp & 0.80 & 0.89 & 0.08 \\
+rte & 0.52 & 0.60 & 0.08 \\
+wnli & 0.37 & 0.56 & 0.20 \\
+stbs & 0.87 & 0.87 & 0.00 \\
+mnli & 0.67 & 0.82 & 0.15 \\
+\end{longtable}
+
+For the most part, differences are less than 10\% which is acceptable
+for using a auto model without much focusing into more complex architect
+like using Distilbert inside a neural network architecture with other
+Linear classification layer or dropout layer for regularisation.
+However, the score on wnli and mnli which are infereence tasks are not
+as good as the original paper, it might due to these model have more
+complicated reasoning and context dependence requirement. Therefore, it
+might require more complex fine tuning to get to better result. \#\#
+IMDb dataset
 
 Write about how you did the replication. Include link to notebook
 
-\subsection{IMDb dataset}\label{imdb-dataset-1}
-
-Write about how you did the replication. Include link to notebook
-
-\subsection{SQuAD dataset}\label{squad-dataset-1}
+\hypertarget{squad-dataset-1}{%
+\subsection{SQuAD dataset}\label{squad-dataset-1}}
 
 Evaluation of SQuAD (Stanford QUestion Answering Dataset) question
 answering task was performed by Nadun Chandrabahu and the
@@ -263,9 +386,11 @@ variability in calculating Precision and Recall, as the model's
 predictions can differ slightly with each run, significantly influencing
 Precision and Recall values, and hence the F-Score.
 
-\section{Evaluation on New Datasets}\label{evaluation-on-new-datasets}
+\hypertarget{evaluation-on-new-datasets}{%
+\section{Evaluation on New Datasets}\label{evaluation-on-new-datasets}}
 
-\subsection{Nadun Chandrabahu}\label{nadun-chandrabahu}
+\hypertarget{nadun-chandrabahu}{%
+\subsection{Nadun Chandrabahu}\label{nadun-chandrabahu}}
 
 Evaluation of my new dataset McTest (Machine Comprehension
 Test)\footnote{McTest Dataset:
@@ -303,15 +428,146 @@ DistilBERT makes predictions. As a solution, I could have manually
 curated the ground truth anwers to be similar to the predictions made by
 DistilBERT.
 
-\subsection{Tai Ho}\label{tai-ho}
+\hypertarget{tai-ho}{%
+\subsection{Tai Ho}\label{tai-ho}}
+
+For my own datasets, I will test the capabilities of DistilBERT on the
+single-sentence tasks and similarity and paraphrase tasks with two
+datasets from Hugging Face.
+
+\hypertarget{emotion-dataset}{%
+\subsubsection{Emotion Dataset}\label{emotion-dataset}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.9248}}
+  >{\centering\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.0752}}@{}}
+\caption{Text Emotion Data}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Text
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Label
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Text
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Label
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+i didnt feel humiliated & sadness \\
+i can go from feeling so hopeless to so damned hopeful just from being
+around someone who cares and is awake & sadness \\
+im grabbing a minute to post i feel greedy wrong & anger \\
+i am ever feeling nostalgic about the fireplace i will know that it is
+still on the property & love \\
+i am feeling grouchy & anger \\
+ive been feeling a little burdened lately wasnt sure why that was &
+sadness \\
+ive been taking or milligrams or times recommended amount and ive fallen
+asleep a lot faster but i also feel like so funny & surprise \\
+\end{longtable}
+
+It contain single sentence describing simple human emotions and 6 labels
+including sadness, anger, fear, joy, love, and surprise \footnote{Emotion
+  Dataset: \url{https://huggingface.co/datasets/dair-ai/emotion}}. The
+first three sadness, anger, and fear are formatted to negative and the
+last three joy, love, and surprise are formatted to positive. For the
+test, I formatted it to the SST-2 tokenize rule and metrics calculation
+to evaluate it on the pretrained DistilBERT model
+
+\hypertarget{paws-dataset}{%
+\subsubsection{PAWS dataset}\label{paws-dataset}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4775}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.5015}}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0210}}@{}}
+\caption{Sentence Pair Comparison Data}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Sentence1
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Sentence2
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Label
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Sentence1
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Sentence2
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Label
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+In Paris , in October 1560 , he secretly met the English ambassador ,
+Nicolas Throckmorton , asking him for a passport to return to England
+through Scotland . & In October 1560 , he secretly met with the English
+ambassador , Nicolas Throckmorton , in Paris , and asked him for a
+passport to return to Scotland through England . & 0 \\
+The NBA season of 1975 -- 76 was the 30th season of the National
+Basketball Association . & The 1975 -- 76 season of the National
+Basketball Association was the 30th season of the NBA . & 1 \\
+There are also specific discussions , public profile debates and project
+discussions . & There are also public discussions , profile specific
+discussions , and project discussions . & 0 \\
+When comparable rates of flow can be maintained , the results are high .
+& The results are high when comparable flow rates can be maintained . &
+1 \\
+\end{longtable}
+
+It from Google Research containing two sentence and a label of 0 and 1
+determining whether the two sentences are equivalent or not \footnote{PAWS
+  Dataset:
+  \url{https://huggingface.co/datasets/google-research-datasets/paws}
+  \#\# Thanushreyas Appaji}. I used labeled-final subset as it have both
+methods of acquiring similar sentences by Google: word swapping and back
+translations. It follows quite similar structure to other paraphrasing
+test so I can just use the MRPC format on it in terms of both tokenizer
+and metrics computation.
+
+In terms of results, we can see similar trend to the GLUE benchmark
+replication. The emotion dataset as being only a single sentence with
+simple emotion expressions. That explains how it get quite high accuracy
+of 97.4\%. But when the task get more complicated like PAWS, the model
+performs worse when only have accuracy of 51.9\%.
+
+Therefore, it hinted that there should be more tuning and considering
+adapting the DistillBERT model as the core feature extractor inside a
+neural network infrastructure could potentially increase its application
+and capability in terms of natural language understanding task.
+
+\begin{longtable}[]{@{}lc@{}}
+\caption{Emotion and PAWS Results}\tabularnewline
+\toprule\noalign{}
+Task & Value \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Task & Value \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+emotion & 0.974 \\
+paws & 0.519 \\
+\end{longtable}
 
 Write about your own dataset and metrics
 
-\subsection{Thanushreyas Appaji}\label{thanushreyas-appaji}
-
-Write about your own dataset and metrics
-
-\section{Reflections}\label{reflections}
+\hypertarget{reflections}{%
+\section{Reflections}\label{reflections}}
 
 Each of us can write a paragraph about our reflections on the project.
 
@@ -325,7 +581,18 @@ model predictions, which can notably impact the F1 score as True
 Positives, False Positives and False Negatives may be incorrectly
 counted.
 
-\section{References}\label{references}
+Vu Anh Tai Ho (Tai), has finished reevaluate the DistilBERT model on
+GLUE task, as well as new datasets with single sentence tasks (emotion)
+and similarity tasks (PAWS). The finding is the pretrained models can
+work really well with simple single sentence task, however, when the
+tasks get complicated like more labels, more reasoning or context
+understanding requirement, the DistilBERT model performs worse than
+expected. However, given its purpose of being a lightweight model, its
+performances can be sufficient for initial analysing and testing before
+the comprehensive and exhaustive tasks that required more complex model
+
+\hypertarget{references}{%
+\section{References}\label{references}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -344,6 +611,17 @@ counted.
   Richardson, M., Burges, C. J., \& Renshaw, E. (2013). MCTest: A
   Challenge Dataset for the Open-Domain Machine Comprehension of Text.
   EMNLP. \url{https://mattr1.github.io/mctest/MCTest_EMNLP2013.pdf}
+\item
+  Zhang, Y., Baldridge, J., \& He, L. (2019). PAWS: Paraphrase
+  adversaries from word scrambling. In Proceedings of the North American
+  Chapter of the Association for Computational Linguistics (NAACL).
+\item
+  Saravia, E., Liu, H.-C. T., Huang, Y.-H., Wu, J., \& Chen, Y.-S.
+  (2018). CARER: Contextualized affect representations for emotion
+  recognition. In Proceedings of the 2018 Conference on Empirical
+  Methods in Natural Language Processing (EMNLP) (pp.~3687-3697).
+  Association for Computational Linguistics.
+  \url{https://doi.org/10.18653/v1/D18-1404}
 \end{enumerate}
 
 \end{document}
