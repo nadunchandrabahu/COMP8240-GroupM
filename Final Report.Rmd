@@ -1,6 +1,7 @@
 ---
-title: "Replication of DistilBERT evaluation - Group M"
-author: "Tai Ho, Nadun Chandrabahu, Muhammad Umer Bashir, Thanushreyas "
+title: "Replication of DistilBERT evaluation results"
+author: "Group M - Tai Ho, Nadun Chandrabahu, Muhammad Umer Bashir, Thanushreyas"
+date: "1/11/2024"
 output: 
   pdf_document:
     number_sections: true
@@ -10,15 +11,25 @@ fontsize: 11pt
 geometry: a4paper 
 ---
 
-# Replication of DistilBERT evaluation
+# 
 
-## Introduction
+# Introduction
+
+In this paper we will attempt to reproduce part of the research paper titled "DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter. Specifically we are attempting to reproduce the evaluation results on how well the model, DistilBERT performs on datasets including: GLUE (General Language and Evaluation) benchmark, IMDb (Internet Movie Database) dataset for sentiment classification and SQuAD (Stanford Question Answering Dataset) for question answering tasks.
 
 Describe the source paper and talk about our project justification again.
 
 Add a footnote to the original paper: <https://arxiv.org/abs/1910.01108> (Sanh et al, 2019)
 
 Sanh, V., Debut, L., Chaumond, J., & Wolf, T. (2019). DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter (Version 4). arXiv. <https://doi.org/10.48550/ARXIV.1910.01108>
+
+# DistilBERT
+
+DistilBERT is a student model of BERT
+
+The trained model is already available through a python library called transformers which is provided by hugging face.com (add reference). There are a few variations of the model available as well depending on what kind of data the model was trained on.
+
+online link to SQuAD data set: [https://github.com/rajpurkar/SQuAD-explorer/blob/master/dataset/dev-v1.1.jsonhttps://github.com/rajpurkar/SQuAD-explorer/blob/master/dataset/dev-v1.1.json](https://github.com/rajpurkar/SQuAD-explorer/blob/master/dataset/dev-v1.1.json){.uri}
 
 ## Evaluation Datasets
 
@@ -30,7 +41,7 @@ Show the coding and use the model on the datasets used in the paper such as GLUE
 
 Include link to our github repo. And how we can replicate. Maybe we can include a notebook file running the evaluation on the datasets. We're using python version 3.12.7 to install transformers library so we can get the model. Also need to install pytorch
 
-```{python, install_libraries, include=FALSE}
+```{python, install_libraries, include=FALSE,eval=FALSE}
 import subprocess
 subprocess.run(["pip","install","transformers"])
 subprocess.run(["pip","install","torch"])
@@ -41,7 +52,7 @@ subprocess.run(["pip","install","torch"])
 
 We can run python code as follows, calculate metrics and report on them. Let's have a discussion about the results on the datasets used in the paper in this section as well.
 
-```{python, load_libraries}
+```{python, load_libraries,eval=FALSE}
 from transformers import pipeline
 print("Hello GroupM!")
 ```
