@@ -95,6 +95,20 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -117,8 +131,17 @@ Thanushreyas}
 
 \section{Introduction}\label{introduction}
 
-The paper, (Sanh et al, 2019)\footnote{(Sanh et al, 2019:
-  \url{https://arxiv.org/pdf/1910.01108})} ``DistilBERT, a distilled
+Reproducible research is vital in machine learning for several reasons.
+Firstly, it enables the validation of results, when research can be
+consistently reproduced, it enhances the credibility of the original
+findings. Additionally, reproducibility supports benchmarking for
+comparing algorithms and models, allowing the machine learning community
+to identify the best-performing models. It also plays an important role
+in identifying errors and biases, such as coding mistakes or data
+handling issues, improving the reliability of the research.
+
+The paper, (Sanh et al, 2019)\footnote{(Sanh et al, 2019):
+  \url{https://arxiv.org/pdf/1910.01108}} ``DistilBERT, a distilled
 version of BERT: smaller, faster, cheaper and lighter'', we selected for
 this project presents a method for training a more compact
 general-purpose language representation model called DistilBERT, which
@@ -132,6 +155,10 @@ inference performance by reducing both its size and inference time while
 maintaining accuracy. According to the paper, DistilBERT achieves a 40\%
 reduction in model size, preserves 97\% of BERT's language understanding
 capabilities, and improves processing speed by 60\%.
+
+The source files and collaborative work done on this project is
+available for review on GitHub\footnote{GitHub Repository for project:
+  \url{https://github.com/nadunchandrabahu/COMP8240-GroupM}}.
 
 \section{Project Justification}\label{project-justification}
 
@@ -163,6 +190,39 @@ reported in Tables 1 and 2 of the research paper and it is the aim of
 this project to replicate these results. Each group member will also
 show the metrics using new data sources to perform similar NLP tasks
 with DistilBERT.
+
+Table 1 below shows a summary of GLUE average score as shown in the
+research paper.
+
+\begin{longtable}[t]{ccccccccccc}
+\caption{\label{tab:table1}BERT and DistilBERT results on GLUE tasks}\\
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{10}{c}{Metrics} \\
+\cmidrule(l{3pt}r{3pt}){2-11}
+Model.Name & Score & CoLA & MNLI & MRPC & QNLI & QQP & RTE & SST.2 & STS.B & WNLI\\
+\midrule
+ &  &  &  &  &  &  &  &  &  & \\
+BERT-base & 79.5 & 56.3 & 86.7 & 88.6 & 91.8 & 89.6 & 69.3 & 92.7 & 89 & 53.5\\
+DistilBERT & 77 & 51.3 & 82.2 & 87.5 & 89.2 & 88.5 & 59.9 & 91.3 & 86.9 & 56.3\\
+\bottomrule
+\end{longtable}
+
+Table 2 below shows the test accuracy of IMDb sentiment analysis tasks,
+and EM/F1 scores of the SQuAD question answering task as shown on the
+research paper.
+
+\begin{longtable}[t]{cccc}
+\caption{\label{tab:table2}IMDb and SQuAD metrics}\\
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{1}{c}{IMDb} & \multicolumn{2}{c}{SQuAD} \\
+\cmidrule(l{3pt}r{3pt}){2-2} \cmidrule(l{3pt}r{3pt}){3-4}
+Model Name &  &  & \\
+\midrule
+ & acc. & EM & F1\\
+BERT-base & 93.46 & 81.2 & 88.5\\
+DistilBERT & 92.82 & 77.7 & 85.8\\
+\bottomrule
+\end{longtable}
 
 \section{DistilBERT}\label{distilbert}
 

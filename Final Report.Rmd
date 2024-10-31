@@ -13,22 +13,78 @@ geometry: a4paper
 
 # Introduction
 
-
+Reproducible research is vital in machine learning for several reasons. Firstly, it enables the validation of results, when research can be consistently reproduced, it enhances the credibility of the original findings. Additionally, reproducibility supports benchmarking for comparing algorithms and models, allowing the machine learning community to identify the best-performing models. It also plays an important role in identifying errors and biases, such as coding mistakes or data handling issues, improving the reliability of the research.
 
 The paper, (Sanh et al, 2019)[^1] "DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter", we selected for this project presents a method for training a more compact general-purpose language representation model called DistilBERT, which is a streamlined version of the larger BERT model (Bidirectional Encoder Representations from Transformers). Although BERT is highly effective for Natural Language Processing (NLP) tasks, its size and complexity can lead to slower inference times, particularly in on-the-edge or resource-constrained environments, potentially impacting user experience. This paper aims to pre-train the DistilBERT model to enhance inference performance by reducing both its size and inference time while maintaining accuracy. According to the paper, DistilBERT achieves a 40% reduction in model size, preserves 97% of BERT's language understanding capabilities, and improves processing speed by 60%.
 
-[^1]: (Sanh et al, 2019: <https://arxiv.org/pdf/1910.01108>)
-[^2]: GLUE Benchmark: https://gluebenchmark.com/
-[^3]: IMDb dataset: https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews
-[^4]: SQuAD v1.1 dataset: https://rajpurkar.github.io/SQuAD-explorer/
+[^1]: (Sanh et al, 2019): <https://arxiv.org/pdf/1910.01108>
+
+The source files and collaborative work done on this project is available for review on GitHub[^2].
+
+[^2]: GitHub Repository for project: https://github.com/nadunchandrabahu/COMP8240-GroupM
 
 # Project Justification
 
 In this project, we will not replicate the transfer learning or model training processes of DistilBERT. Instead, we aim to reproduce the evaluation metrics shown in Tables 1 and 2 on page 3 of the referenced research paper, across various datasets and downstream tasks. This will allow us to assess DistilBERT's performance both on the datasets from the paper and on some of our own datasets.
 
-The DistilBERT model is available for use through Hugging Face's transformers library (Wolf et al., 2019). In the original research, DistilBERT was evaluated using three datasets: the GLUE (General Language Understanding and Evaluation) benchmark [^2], which includes nine sentence-pair language understanding tasks; IMDb [^3], used for sentiment classification of user movie reviews; and SQuAD [^4] (Stanford Question Answering Dataset), designed for question-answering based on a provided passage.
+The DistilBERT model is available for use through Hugging Face's transformers library (Wolf et al., 2019). In the original research, DistilBERT was evaluated using three datasets: the GLUE (General Language Understanding and Evaluation) benchmark [^3], which includes nine sentence-pair language understanding tasks; IMDb [^4], used for sentiment classification of user movie reviews; and SQuAD [^5] (Stanford Question Answering Dataset), designed for question-answering based on a provided passage.
+
+[^3]: GLUE Benchmark: <https://gluebenchmark.com/>
+
+[^4]: IMDb dataset: <https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews>
+
+[^5]: SQuAD v1.1 dataset: <https://rajpurkar.github.io/SQuAD-explorer/>
 
 We will run some Python scripts to make predictions on the data with the DistilBERT model and calculate various metrics: the average score across the nine GLUE benchmark tasks, test accuracy on the IMDb dataset, and the Exact Match (EM) and F1 score on the SQuAD task. These metrics are reported in Tables 1 and 2 of the research paper and it is the aim of this project to replicate these results. Each group member will also show the metrics using new data sources to perform similar NLP tasks with DistilBERT.
+
+Table 1 below shows a summary of GLUE average score as shown in the research paper.
+
+```{r table1, echo=FALSE}
+library(knitr)
+library(kableExtra)
+
+# Create the data
+table_data <- data.frame(
+  "Model Name" = c("", "BERT-base", "DistilBERT"),
+  "Score" = c("", 79.5, 77.0),
+  "CoLA" = c("", 56.3, 51.3),
+  "MNLI" = c("", 86.7, 82.2),
+  "MRPC" = c("", 88.6, 87.5),
+  "QNLI" = c("", 91.8, 89.2),
+  "QQP" = c("", 89.6, 88.5),
+  "RTE" = c("", 69.3, 59.9),
+  "SST-2" = c("", 92.7, 91.3),
+  "STS-B" = c("", 89.0, 86.9),
+  "WNLI" = c("", 53.5, 56.3)
+)
+
+# Create the table
+kable(table_data, align = "c", caption = "BERT and DistilBERT results on GLUE tasks") %>%
+  add_header_above(c(" " = 1, "Metrics" = 10)) %>%
+  kable_styling(full_width = F)
+
+```
+
+Table 2 below shows the test accuracy of IMDb sentiment analysis tasks, and EM/F1 scores of the SQuAD question answering task as shown on the research paper.
+
+```{r table2, echo=FALSE}
+library(knitr)
+library(kableExtra)
+
+# Create the data
+table_data <- data.frame(
+  model_name = c("", "BERT-base", "DistilBERT"),
+  accuracy = c("acc.", 93.46, 92.82),
+  "ExactMatch" = c("EM", 81.2, 77.7),
+  "FScore" = c("F1", 88.5, 85.8)
+)
+
+# Create the table with merged columns in the header
+kable(table_data, align = "c",caption="IMDb and SQuAD metrics",col.names=c("Model Name","","","")) %>%
+  add_header_above(c(" " = 1, "IMDb" = 1, "SQuAD" = 2)) %>%
+  kable_styling(full_width = F)
+
+```
 
 # DistilBERT
 
