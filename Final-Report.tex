@@ -267,8 +267,8 @@ GitHub\footnote{SQuAD v1.1 Dev set:
 The dataset consists of 17968 question-answer combinations. Each
 question and answer is based on the provided context. There are multiple
 ground truth answers to the same question. We only need to extract the
-context, question and answer (answer\_text) for the purpose of
-calculating Exact Match and F-Score.
+\texttt{context}, \texttt{question} and answer (\texttt{answer\_text})
+for the purpose of calculating Exact Match and F-Score.
 
 \begin{verbatim}
 ## Columns of SQuAD devset:
@@ -400,15 +400,15 @@ The dataset includes 600 records of the following columns:
 ## properties, answer_options, answer, question_is_multiple
 \end{verbatim}
 
-The dataset can be easily loaded into Python using the
-\texttt{load\_datasets} method from the HuggingFace datasets library. I
-had to combine the above two columns answer\_options, which is a
-dictionary of all the possible multiple choice answers and answer, which
-is the correct choice out of A, B, C, or D, into a new column called
-answer\_text which would act as the ground truth label. The model
-predictions once again included a score, start and answer (predicted
-answer) and the rest of the processing \& evaluating of EM and F1 scores
-was carried out similar to how SQuAD task was evaluated.
+The dataset can be easily loaded into Python using the load\_datasets
+method from the HuggingFace datasets library. I had to combine the above
+two columns \texttt{answer\_options}, which is a dictionary of all the
+possible multiple choice answers and \texttt{answer}, which is the
+correct choice out of A, B, C, or D, into a new column called
+\texttt{answer\_text} which would act as the ground truth label. The
+model predictions once again included a score, start and \texttt{answer}
+(predicted answer) and the rest of the processing \& evaluating of EM
+and F1 scores was carried out similar to how SQuAD task was evaluated.
 
 I selected the McTest dataset due to it being another question-answering
 NLP task that is possible to be conducted using the DistilBERT model.
