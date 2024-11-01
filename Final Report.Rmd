@@ -274,7 +274,7 @@ subprocess.run(["pip","install","torch"])
 
 ## SST-2 dataset
 
-Evaluation of SST-2 (Stanford Sentiment Treebank) analysis task was performed by Muhammad Umer Bashir and the Jupyter-notebook code file is available in the github repository.
+Evaluation of SST-2 (Stanford Sentiment Treebank) task was performed by Muhammad Umer Bashir and the Jupyter-notebook code file is available in the github repository.
 
 
 # Evaluation on New Datasets
@@ -408,7 +408,7 @@ I, Nadun Chandrabahu, successfully replicated the evaluation results of DistilBE
 
 Vu Anh Tai Ho (Tai), has finished reevaluate the DistilBERT model on GLUE task, as well as new datasets with single sentence tasks (emotion) and similarity tasks (PAWS). The finding is the pretrained models can work really well with simple single sentence task, however, when the tasks get complicated like more labels, more reasoning or context understanding requirement, the DistilBERT model performs worse than expected. However, given its purpose of being a lightweight model, its performances can be sufficient for initial analysing and testing before the comprehensive and exhaustive tasks that required more complex model
 
-I, Muhammad Umer Bashir, Here this project showcased how DistilBERT remains performant even when the computations are optimized. Possible future work could take this study further by conducting the cross-domain experiment, or try using DistilBERT on other sentiment data sets, or by increasing the complexity of the SST-2 data set.
+I, Muhammad Umer Bashir, here have this project showcased how DistilBERT remains performant even when the computations are optimized. Possible future work could take this study further by conducting the cross-domain experiment, or try using DistilBERT on other sentiment data sets, or by increasing the complexity of the SST-2 data set.
 
 # References
 
