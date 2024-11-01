@@ -35,6 +35,8 @@ In this project, we will not replicate the transfer learning or model training p
 
 [^5]: SQuAD v1.1 dataset: <https://rajpurkar.github.io/SQuAD-explorer/>
 
+[^6]: SST-2 dataset: <https://huggingface.co/datasets/nyu-mll/glue/viewer/sst2/>
+
 We will run some python code on Jupyter/Colab notebooks to make predictions on the data with the DistilBERT model and calculate various metrics: the average score across the nine GLUE benchmark tasks, test accuracy on the IMDb dataset, and the Exact Match (EM) and F1 score on the SQuAD task. These metrics are reported in Tables 1 and 2 of the research paper and it is the aim of this project to replicate these results. Each group member will also show the metrics using new data sources to perform similar NLP tasks with DistilBERT.
 
 Table 1 below shows the scoring of DistilBERT evaluation on 9 GLUE benchmark tasks as shown in the research paper.
