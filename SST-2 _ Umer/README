@@ -1,3 +1,4 @@
+For data loading, the datasets library from authors of the Hugging Face was used, which allowed working with several benchmark datasets and guaranteed their further preprocessing. 
 Project Dataset links:
 GLUE: https://huggingface.co/datasets/nyu-mll/glue
 SST-2: https://huggingface.co/datasets/nyu-mll/glue/viewer/sst2
