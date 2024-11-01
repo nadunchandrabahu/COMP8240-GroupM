@@ -2,7 +2,7 @@
 title: "Replication of DistilBERT evaluation results"
 author: |
   | Group M - Nadun Chandrabahu, Vu Anh Tai Ho
-  | Thanushreyas Appaji, Muhammad Umer Bashir
+  | Thanushreyas Appaji, Muhammad Umer Bashir 007
 date: "November 1, 2024"
 output: 
   pdf_document:
