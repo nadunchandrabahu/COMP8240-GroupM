@@ -94,8 +94,7 @@ The 9 tasks are divided on 3 group of tasks: Single-Sentence Tasks, Similarity a
 
 ### Single-Sentence Tasks
 
-*CoLa* testing linguistic acceptability determining whether a sentence is grammatically acceptable. It is taken from various piece of literature and its acceptability is manually marked by verified linguists
-*SST-2* testing sentiment understanding by making predictions whether a sentence is positive or negative. It is sourced from web movie reviews with binary classification.
+*CoLa* testing linguistic acceptability determining whether a sentence is grammatically acceptable. It is taken from various piece of literature and its acceptability is manually marked by verified linguists *SST-2* testing sentiment understanding by making predictions whether a sentence is positive or negative. It is sourced from web movie reviews with binary classification.
 
 ### Similarity and Paraprhase Tasks
 
@@ -113,8 +112,7 @@ The 9 tasks are divided on 3 group of tasks: Single-Sentence Tasks, Similarity a
 
 *WNLI* a more challenging test with complex reasoning with data from fiction books which can be more ambiguous and require commonsense knowledge and context understanding. The NLP model in this test cannot simply use cues like pronouns to infer
 
-*RTE* testing textual entailment.The test combines multiple versions of a challenge dataset (1,2,3,5 to be exact) coming from news article and Wikipedia. It contains two labels of entailment and not entailment
-## IMDb dataset
+*RTE* testing textual entailment.The test combines multiple versions of a challenge dataset (1,2,3,5 to be exact) coming from news article and Wikipedia. It contains two labels of entailment and not entailment \## IMDb dataset
 
 Describe about the dataset. Whole section 3 (Original Dataset should be 1/3rd of a page).
 
@@ -174,9 +172,9 @@ We are able to access the DistilBERT model from 'transformers' library provided 
 
 ## GLUE Benchmark
 
-The GLUE Benchmark reevaluation was initiated by Vu Anh Tai Ho using transformers library together with Trainer method to manage model training. The datasets are collected directly from HuggingFace's datasets library. Then tokenized using DistilBertTokenizerFast. The tokenize function are different in the 9 tests just because of the different format of label and features (some are called sentence1 and sentence2, some are called premise and hypothesis. 
+The GLUE Benchmark reevaluation was initiated by Vu Anh Tai Ho using transformers library together with Trainer method to manage model training. The datasets are collected directly from HuggingFace's datasets library. Then tokenized using DistilBertTokenizerFast. The tokenize function are different in the 9 tests just because of the different format of label and features (some are called sentence1 and sentence2, some are called premise and hypothesis.
 
-The pretrained-model I used are DistilBertForSequenceClassification for classification tasks and AutoModelForSequenceClassification for STS-B task. For simple training process, I use Training Arguments with settings about epochs, batch size, weight decays, or warmups steps. 
+The pretrained-model I used are DistilBertForSequenceClassification for classification tasks and AutoModelForSequenceClassification for STS-B task. For simple training process, I use Training Arguments with settings about epochs, batch size, weight decays, or warmups steps.
 
 The next task is to determine the metrics used to evaluate the performance of the models. In here I have to use two cases for STS-B tasks, as the labels are float number, I have to squeeze the predictions before pass them for pearson correlation coefficients computation in the metric loaded from datasets library. For other tasks, as label are ordinal value, I can use argmax to compute the accorded prediction used in the GLUE Benchmark (accuracy, F1 score, or matthew's correlation)
 
@@ -193,8 +191,8 @@ results <- data.frame(
 
 kable(results, caption = "GLUE Benchmark Results", align = c("l", "c", "c", "c"))
 ```
-For the most part, differences are less than 10% which is acceptable for using a auto model without much focusing into more complex architect like using Distilbert inside a neural network architecture with other Linear classification layer or dropout layer for regularisation. However, the score on wnli and mnli which are infereence tasks are not as good as the original paper, it might due to these model have more complicated reasoning and context dependence requirement. Therefore, it might require more complex fine tuning to get to better result.
-## IMDb dataset
+
+For the most part, differences are less than 10% which is acceptable for using a auto model without much focusing into more complex architect like using Distilbert inside a neural network architecture with other Linear classification layer or dropout layer for regularisation. However, the score on wnli and mnli which are infereence tasks are not as good as the original paper, it might due to these model have more complicated reasoning and context dependence requirement. Therefore, it might require more complex fine tuning to get to better result. \## IMDb dataset
 
 Write about how you did the replication. Include link to notebook
 
@@ -251,11 +249,11 @@ I selected the McTest dataset due to it being another question-answering NLP tas
 
 ## Tai Ho
 
-For my own datasets, I will test the capabilities of DistilBERT on the single-sentence tasks and similarity and paraphrase tasks with two datasets from Hugging Face. 
+For my own datasets, I will test the capabilities of DistilBERT on the single-sentence tasks and similarity and paraphrase tasks with two datasets from Hugging Face.
 
 ### Emotion Dataset
 
-``` {r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 emotion_data <- data.frame(
   Text = c(
     "i didnt feel humiliated",
@@ -274,9 +272,11 @@ kable(emotion_data, caption = "Text Emotion Data", align = c("l", "c"))
 
 It contain single sentence describing simple human emotions and 6 labels including sadness, anger, fear, joy, love, and surprise [^8]. The first three sadness, anger, and fear are formatted to negative and the last three joy, love, and surprise are formatted to positive. For the test, I formatted it to the SST-2 tokenize rule and metrics calculation to evaluate it on the pretrained DistilBERT model
 
+[^8]: Emotion Dataset: <https://huggingface.co/datasets/dair-ai/emotion>
+
 ### PAWS dataset
 
-``` {r echo=FALSE}
+```{r echo=FALSE}
 sentence_pair_data <- data.frame(
   Sentence1 = c(
     "In Paris , in October 1560 , he secretly met the English ambassador , Nicolas Throckmorton , asking him for a passport to return to England through Scotland .",
@@ -296,11 +296,13 @@ sentence_pair_data <- data.frame(
 kable(sentence_pair_data, caption = "Sentence Pair Comparison Data", align = c("l", "l", "c"))
 ```
 
-It from Google Research containing two sentence and a label of 0 and 1 determining whether the two sentences are equivalent or not [^9]. I used labeled-final subset as it have both methods of acquiring similar sentences by Google: word swapping and back translations. It follows quite similar structure to other paraphrasing test so I can just use the MRPC format on it in terms of both tokenizer and metrics computation. 
+It from Google Research containing two sentence and a label of 0 and 1 determining whether the two sentences are equivalent or not [^9]. I used labeled-final subset as it have both methods of acquiring similar sentences by Google: word swapping and back translations. It follows quite similar structure to other paraphrasing test so I can just use the MRPC format on it in terms of both tokenizer and metrics computation.
+
+[^9]: PAWS Dataset: <https://huggingface.co/datasets/google-research-datasets/paws> \## Thanushreyas Appaji
 
 In terms of results, we can see similar trend to the GLUE benchmark replication. The emotion dataset as being only a single sentence with simple emotion expressions. That explains how it get quite high accuracy of 97.4%. But when the task get more complicated like PAWS, the model performs worse when only have accuracy of 51.9%.
 
-Therefore, it hinted that there should be more tuning and considering adapting the DistillBERT model as the core feature extractor inside a neural network infrastructure could potentially increase its application and capability in terms of natural language understanding task. 
+Therefore, it hinted that there should be more tuning and considering adapting the DistillBERT model as the core feature extractor inside a neural network infrastructure could potentially increase its application and capability in terms of natural language understanding task.
 
 ```{r echo=FALSE}
 emotion_paws_results <- data.frame(
@@ -310,10 +312,6 @@ emotion_paws_results <- data.frame(
 kable(emotion_paws_results, caption = "Emotion and PAWS Results", align = c("l", "c"))
 ```
 
-[^8]: Emotion Dataset: <https://huggingface.co/datasets/dair-ai/emotion>
-[^9]: PAWS Dataset: <https://huggingface.co/datasets/google-research-datasets/paws>
-## Thanushreyas Appaji
-
 Write about your own dataset and metrics
 
 # Reflections
@@ -322,7 +320,7 @@ Each of us can write a paragraph about our reflections on the project.
 
 I, Nadun Chandrabahu, successfully replicated the evaluation results of DistilBERT on the SQuAD task, and explored the same metrics on McTest NLP question answering task. Although my EM scores were satisfactory, my F1 scores did not match up to expectations on both the SQuAD and MCTest question-answering tasks. This discrepancy may stem from an error in my method to F1 score calculation or could be due to the random errors in model predictions, which can notably impact the F1 score as True Positives, False Positives and False Negatives may be incorrectly counted.
 
-Vu Anh Tai Ho (Tai), has finished reevaluate the DistilBERT model on GLUE task, as well as new datasets with single sentence tasks (emotion) and similarity tasks (PAWS). The finding is the pretrained models can work really well with simple single sentence task, however, when the tasks get complicated like more labels, more reasoning or context understanding requirement, the DistilBERT model performs worse than expected. However, given its purpose of being a lightweight model, its performances can be sufficient for initial analysing and testing before the comprehensive and exhaustive tasks that required more complex model 
+Vu Anh Tai Ho (Tai), has finished reevaluate the DistilBERT model on GLUE task, as well as new datasets with single sentence tasks (emotion) and similarity tasks (PAWS). The finding is the pretrained models can work really well with simple single sentence task, however, when the tasks get complicated like more labels, more reasoning or context understanding requirement, the DistilBERT model performs worse than expected. However, given its purpose of being a lightweight model, its performances can be sufficient for initial analysing and testing before the comprehensive and exhaustive tasks that required more complex model
 
 # References
 
@@ -332,6 +330,6 @@ Vu Anh Tai Ho (Tai), has finished reevaluate the DistilBERT model on GLUE task, 
 
 3.  Richardson, M., Burges, C. J., & Renshaw, E. (2013). MCTest: A Challenge Dataset for the Open-Domain Machine Comprehension of Text. EMNLP. <https://mattr1.github.io/mctest/MCTest_EMNLP2013.pdf>
 
-4. Zhang, Y., Baldridge, J., & He, L. (2019). PAWS: Paraphrase adversaries from word scrambling. In Proceedings of the North American Chapter of the Association for Computational Linguistics (NAACL).
+4.  Zhang, Y., Baldridge, J., & He, L. (2019). PAWS: Paraphrase adversaries from word scrambling. In Proceedings of the North American Chapter of the Association for Computational Linguistics (NAACL).
 
-5. Saravia, E., Liu, H.-C. T., Huang, Y.-H., Wu, J., & Chen, Y.-S. (2018). CARER: Contextualized affect representations for emotion recognition. In Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing (EMNLP) (pp. 3687-3697). Association for Computational Linguistics. https://doi.org/10.18653/v1/D18-1404 
+5.  Saravia, E., Liu, H.-C. T., Huang, Y.-H., Wu, J., & Chen, Y.-S. (2018). CARER: Contextualized affect representations for emotion recognition. In Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing (EMNLP) (pp. 3687-3697). Association for Computational Linguistics. <https://doi.org/10.18653/v1/D18-1404>

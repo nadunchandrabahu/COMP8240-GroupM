@@ -82,7 +82,7 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
@@ -99,8 +99,7 @@ Bashir, Thanushreyas Appaji}
 \begin{document}
 \maketitle
 
-\hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
+\section{Introduction}\label{introduction}
 
 Reproducible research is vital in machine learning for several reasons.
 Firstly, it enables the validation of results, when research can be
@@ -132,8 +131,7 @@ The source files and collaborative work done on this project is
 available for review on GitHub\footnote{Project on GitHub:
   \url{https://github.com/nadunchandrabahu/COMP8240-GroupM}}.
 
-\hypertarget{project-justification}{%
-\section{Project Justification}\label{project-justification}}
+\section{Project Justification}\label{project-justification}
 
 In this project, we will not replicate the transfer learning or model
 training processes of DistilBERT. Instead, we aim to reproduce the
@@ -195,11 +193,9 @@ DistilBERT & 92.82 & 77.7 & 85.8\\
 \bottomrule
 \end{longtable}
 
-\hypertarget{original-datasets}{%
-\section{Original Datasets}\label{original-datasets}}
+\section{Original Datasets}\label{original-datasets}
 
-\hypertarget{glue-benchmark}{%
-\subsection{GLUE Benchmark}\label{glue-benchmark}}
+\subsection{GLUE Benchmark}\label{glue-benchmark}
 
 GLUE (General Language Understanding Evaluation) contains 9 tasks from
 sentiment understanding to inference to evaluate a Natural Language
@@ -209,8 +205,7 @@ to a person with common knowledge.
 The 9 tasks are divided on 3 group of tasks: Single-Sentence Tasks,
 Similarity and Paraphrase Tasks, and Inference Tasks.
 
-\hypertarget{single-sentence-tasks}{%
-\subsubsection{Single-Sentence Tasks}\label{single-sentence-tasks}}
+\subsubsection{Single-Sentence Tasks}\label{single-sentence-tasks}
 
 \emph{CoLa} testing linguistic acceptability determining whether a
 sentence is grammatically acceptable. It is taken from various piece of
@@ -219,9 +214,8 @@ linguists \emph{SST-2} testing sentiment understanding by making
 predictions whether a sentence is positive or negative. It is sourced
 from web movie reviews with binary classification.
 
-\hypertarget{similarity-and-paraprhase-tasks}{%
 \subsubsection{Similarity and Paraprhase
-Tasks}\label{similarity-and-paraprhase-tasks}}
+Tasks}\label{similarity-and-paraprhase-tasks}
 
 \emph{MRPC} testing paraphrase capability concerning the news. Microsoft
 Research designed this corpus from multiple news sources. It contain
@@ -239,9 +233,8 @@ others
 comes from Quora site containing a pair of questions, the task here is
 for NLP model to predict whether the two questions are similar or not
 
-\hypertarget{natural-language-inference-tasks}{%
 \subsubsection{Natural Language Inference
-Tasks}\label{natural-language-inference-tasks}}
+Tasks}\label{natural-language-inference-tasks}
 
 \emph{MNLI} containing a premise-hypothesis pair about a wide sources of
 Fiction, Government Report, Telephone Conversation. The tasks is to test
@@ -265,8 +258,7 @@ entailment \#\# IMDb dataset
 Describe about the dataset. Whole section 3 (Original Dataset should be
 1/3rd of a page).
 
-\hypertarget{squad-dataset}{%
-\subsection{SQuAD dataset}\label{squad-dataset}}
+\subsection{SQuAD dataset}\label{squad-dataset}
 
 The research paper makes use of SQuAD v1.1 development set available on
 GitHub\footnote{SQuAD v1.1 Dev set:
@@ -282,9 +274,8 @@ calculating Exact Match and F-Score.
 ##  ['answer_text', 'answer_start', 'question', 'context', 'subject']
 \end{verbatim}
 
-\hypertarget{replication-of-evaluation-on-datasets}{%
 \section{Replication of Evaluation on
-Datasets}\label{replication-of-evaluation-on-datasets}}
+Datasets}\label{replication-of-evaluation-on-datasets}
 
 We are able to access the DistilBERT model from `transformers' library
 provided by HuggingFace. It is essential to have pyTorch installed
@@ -292,8 +283,7 @@ before using the model to make predictions. The amount of time taken to
 make predictions depends on the size of the dataset, computational power
 and NLP task it tries to achieve.
 
-\hypertarget{glue-benchmark-1}{%
-\subsection{GLUE Benchmark}\label{glue-benchmark-1}}
+\subsection{GLUE Benchmark}\label{glue-benchmark-1}
 
 The GLUE Benchmark reevaluation was initiated by Vu Anh Tai Ho using
 transformers library together with Trainer method to manage model
@@ -350,8 +340,7 @@ IMDb dataset
 
 Write about how you did the replication. Include link to notebook
 
-\hypertarget{squad-dataset-1}{%
-\subsection{SQuAD dataset}\label{squad-dataset-1}}
+\subsection{SQuAD dataset}\label{squad-dataset-1}
 
 Evaluation of SQuAD (Stanford QUestion Answering Dataset) question
 answering task was performed by Nadun Chandrabahu and the
@@ -386,11 +375,9 @@ variability in calculating Precision and Recall, as the model's
 predictions can differ slightly with each run, significantly influencing
 Precision and Recall values, and hence the F-Score.
 
-\hypertarget{evaluation-on-new-datasets}{%
-\section{Evaluation on New Datasets}\label{evaluation-on-new-datasets}}
+\section{Evaluation on New Datasets}\label{evaluation-on-new-datasets}
 
-\hypertarget{nadun-chandrabahu}{%
-\subsection{Nadun Chandrabahu}\label{nadun-chandrabahu}}
+\subsection{Nadun Chandrabahu}\label{nadun-chandrabahu}
 
 Evaluation of my new dataset McTest (Machine Comprehension
 Test)\footnote{McTest Dataset:
@@ -428,15 +415,13 @@ DistilBERT makes predictions. As a solution, I could have manually
 curated the ground truth anwers to be similar to the predictions made by
 DistilBERT.
 
-\hypertarget{tai-ho}{%
-\subsection{Tai Ho}\label{tai-ho}}
+\subsection{Tai Ho}\label{tai-ho}
 
 For my own datasets, I will test the capabilities of DistilBERT on the
 single-sentence tasks and similarity and paraphrase tasks with two
 datasets from Hugging Face.
 
-\hypertarget{emotion-dataset}{%
-\subsubsection{Emotion Dataset}\label{emotion-dataset}}
+\subsubsection{Emotion Dataset}\label{emotion-dataset}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.9248}}
@@ -481,8 +466,7 @@ last three joy, love, and surprise are formatted to positive. For the
 test, I formatted it to the SST-2 tokenize rule and metrics calculation
 to evaluate it on the pretrained DistilBERT model
 
-\hypertarget{paws-dataset}{%
-\subsubsection{PAWS dataset}\label{paws-dataset}}
+\subsubsection{PAWS dataset}\label{paws-dataset}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4775}}
@@ -566,8 +550,7 @@ paws & 0.519 \\
 
 Write about your own dataset and metrics
 
-\hypertarget{reflections}{%
-\section{Reflections}\label{reflections}}
+\section{Reflections}\label{reflections}
 
 Each of us can write a paragraph about our reflections on the project.
 
@@ -591,8 +574,7 @@ expected. However, given its purpose of being a lightweight model, its
 performances can be sufficient for initial analysing and testing before
 the comprehensive and exhaustive tasks that required more complex model
 
-\hypertarget{references}{%
-\section{References}\label{references}}
+\section{References}\label{references}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
