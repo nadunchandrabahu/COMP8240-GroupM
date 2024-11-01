@@ -37,7 +37,7 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\usepackage[a4paper]{geometry}
+\usepackage[a4paper, top=12mm, bottom=15mm]{geometry}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -87,13 +87,12 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={Replication of DistilBERT evaluation results},
-  pdfauthor={Group M - Nadun Chandrabahu, Vu Anh Tai Ho, Muhammad Umer Bashir, Thanushreyas Appaji},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{Replication of DistilBERT evaluation results}
-\author{Group M - Nadun Chandrabahu, Vu Anh Tai Ho, Muhammad Umer
-Bashir, Thanushreyas Appaji}
+\author{Group M - Nadun Chandrabahu, Vu Anh Tai Ho\\
+Thanushreyas Appaji, Muhammad Umer Bashir}
 \date{November 1, 2024}
 
 \begin{document}
@@ -255,8 +254,10 @@ versions of a challenge dataset (1,2,3,5 to be exact) coming from news
 article and Wikipedia. It contains two labels of entailment and not
 entailment \#\# IMDb dataset
 
-Describe about the dataset. Whole section 3 (Original Dataset should be
-1/3rd of a page).
+\subsection{IMDb dataset}\label{imdb-dataset}
+
+(Thanushreyas Appaji) Describe about the dataset. Try to keep section to
+about 1/3rd of a page
 
 \subsection{SQuAD dataset}\label{squad-dataset}
 
@@ -304,7 +305,7 @@ tasks, as the labels are float number, I have to squeeze the predictions
 before pass them for pearson correlation coefficients computation in the
 metric loaded from datasets library. For other tasks, as label are
 ordinal value, I can use argmax to compute the accorded prediction used
-in the GLUE Benchmark (accuracy, F1 score, or matthew's correlation)
+in the GLUE Benchmark (accuracy, F1 score, or Matthew's correlation)
 
 \begin{longtable}[]{@{}lccc@{}}
 \caption{GLUE Benchmark Results}\tabularnewline
@@ -331,14 +332,16 @@ mnli & 0.67 & 0.82 & 0.15 \\
 For the most part, differences are less than 10\% which is acceptable
 for using a auto model without much focusing into more complex architect
 like using Distilbert inside a neural network architecture with other
-Linear classification layer or dropout layer for regularisation.
-However, the score on wnli and mnli which are infereence tasks are not
-as good as the original paper, it might due to these model have more
+Linear classification layer or dropout layer for regularization.
+However, the score on wnli and mnli which are inference tasks are not as
+good as the original paper, it might due to these model have more
 complicated reasoning and context dependence requirement. Therefore, it
-might require more complex fine tuning to get to better result. \#\#
-IMDb dataset
+might require more complex fine tuning to get to better result.
 
-Write about how you did the replication. Include link to notebook
+\subsection{IMDb dataset}\label{imdb-dataset-1}
+
+(Thanushreyas Appaji) Write about how you did the replication. Include
+link to notebook
 
 \subsection{SQuAD dataset}\label{squad-dataset-1}
 
@@ -367,13 +370,16 @@ the counts of True Positives, False Positives, and False Negatives. True
 Positives occur when the predicted values match the ground truth
 exactly. False Positives arise when the prediction overlaps with the
 ground truth but is not fully correct, while False Negatives are
-predictions that do not align with any part of the ground truth.
+predictions that do not align with any part of the ground truth. The
+results are visualized in figure 1 below.
 
-I obtained an F-Score of 75.2\%, which is 10.6\% lower than the 85.8\%
-reported in the paper. This difference may stem from the inherent
-variability in calculating Precision and Recall, as the model's
-predictions can differ slightly with each run, significantly influencing
-Precision and Recall values, and hence the F-Score.
+\includegraphics{Final-Report_files/figure-latex/squad_visualization-difference-1.pdf}
+
+As shown in Figure 1, I obtained an F-Score of 75.2\%, which is 10.6\%
+lower than the 85.8\% reported in the paper. This difference may stem
+from the inherent variability in calculating Precision and Recall, as
+the model's predictions can differ slightly with each run, significantly
+influencing Precision and Recall values, and hence the F-Score.
 
 \section{Evaluation on New Datasets}\label{evaluation-on-new-datasets}
 
@@ -412,14 +418,14 @@ similar results with this dataset. However, while I achieved an EM score
 of 76.1\%, my F-Score was only 31.2\%, this could be due to the ground
 truth labels in this dataset being formatted much differently to how
 DistilBERT makes predictions. As a solution, I could have manually
-curated the ground truth anwers to be similar to the predictions made by
-DistilBERT.
+curated the ground truth answers to be similar to the predictions made
+by DistilBERT.
 
 \subsection{Tai Ho}\label{tai-ho}
 
 For my own datasets, I will test the capabilities of DistilBERT on the
 single-sentence tasks and similarity and paraphrase tasks with two
-datasets from Hugging Face.
+datasets from HuggingFace.
 
 \subsubsection{Emotion Dataset}\label{emotion-dataset}
 
@@ -548,11 +554,15 @@ emotion & 0.974 \\
 paws & 0.519 \\
 \end{longtable}
 
+\subsection{Thanushreyas Appaji}\label{thanushreyas-appaji}
+
+Write about your own dataset and metrics
+
+\subsection{Muhammed Umer Bashir}\label{muhammed-umer-bashir}
+
 Write about your own dataset and metrics
 
 \section{Reflections}\label{reflections}
-
-Each of us can write a paragraph about our reflections on the project.
 
 I, Nadun Chandrabahu, successfully replicated the evaluation results of
 DistilBERT on the SQuAD task, and explored the same metrics on McTest
