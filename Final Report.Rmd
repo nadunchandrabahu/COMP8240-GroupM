@@ -172,6 +172,14 @@ print("Columns of SQuAD devset:\n",squad_df.columns.tolist())
 
 ```
 
+## SST-2 dataset
+
+We decided to perform the analysis on a limited subset of the SST-2 training set in order to observe the performance of the model in a low-data scenario. It mimics situations which data is scarce, a condition that is often faced in real-world applications.
+Subset Size: It is important to note that our final training for feature selection was arrived at from the reduced training samples of the full 67,349 training examples, where we chose 8,000 samples of such examples randomly. This subset was randomly chosen in order to retain a wide representation.
+Label Distribution: This has been achieved to ensure that the subset we used in the training of the model has both positive and negative labels that are well balanced.
+The subset of the data was tokenized in the same way as the full dataset to keep all the data preparation procedures identical. A smaller subset was first used to approximate a scarce-resource scenario with which we could gauge whether DistilBERT generalizes well with limited training samples.
+
+
 # Replication of Evaluation on Datasets
 
 We are able to access the DistilBERT model from 'transformers' library provided by HuggingFace. It is essential to have pyTorch installed before using the model to make predictions. The amount of time taken to make predictions depends on the size of the dataset, computational power and NLP task it tries to achieve.
@@ -263,6 +271,11 @@ subprocess.run(["pip","install","torch"])
 #!pip install transformers
 #!pip install torch
 ```
+
+## SST-2 dataset
+
+Evaluation of SST-2 (Stanford Sentiment Treebank) analysis task was performed by Muhammad Umer Bashir and the Jupyter-notebook code file is available in the github repository.
+
 
 # Evaluation on New Datasets
 
@@ -363,13 +376,39 @@ Write about your own dataset and metrics
 
 ## Muhammed Umer Bashir
 
-Write about your own dataset and metrics
+When measuring the performance of the DistilBERT model on the new subset of data, we concentrated on several metrics in addition to accuracy to get a better picture of model functioning.
+
+•	Accuracy: Measures the per cent likelihood of correct prediction. DistilBERT fine-tuning achieved approximately 92.75% validation accuracy in the current experiment, which is also near to the baseline accuracy.
+•	Precision: Described as the actual positive (True positive) over total positive, which shows the percentage of the model’s positive sentiment prediction accuracy.
+•	Recall: Quantifies the model’s capacity to detect positive sentiment cases; the ability is expressed as the ratio of correctly identified positive sentiment cases to the total number of actually positive cases.
+•	F1 Score: A single value that amalgamates precision with recall meaning a high harmonic mean of precision and recall. The authors’ model received a high F1 score, meaning that the identification of positive and negative sentiment classes was accurate.
+Epoch	Training Loss	Validation Loss	Accuracy	F1	Precision	Recall
+1	No Log	0.231639	0.903	0.918691	0.927505	0.910042
+2	0.33800	0.242944	0.920	0.933194	0.931250	0.935146
+3	0.172100	0.275485	0.927	0.939076	0.943038	0.935146
+Table. 7 Classification Report of DistilBERT
+From the table.1 it can be observed that training loss reducing was observed in the model after the third epoch suggesting that the training was in proper progress. Instead, the validation loss marginally rose from 0.2316, the result at Epoch 1, to 0.2755, attained at Epoch 3. This rise of validation loss while the accuracy augmented, indicates a relatively small level of overfitting, a typical case in fine-tuning under small datasets. The last value of validation loss equals 0.2755, which is also low meaning that the values predicted by the model were close to true labels in validation set.
+Accuracy refers to number of correct predictions as a percentage of the number of prediction made. By epoch 3, the model was trained to a validation accuracy level of 92.75% which shows a good performance of the model in the classification between positive and negative sentiments. The high accuracy further justifies that DistilBERT is useful for sentiment analysis, even on simple binary classification.
+From 90.37% at Epoch 1 to 92.75% at Epoch 3, is attributed to the model’s capacity to enhance its learning from the data across multiple epochs.
+The condition of f1-socre allows the selection of a fair measure in the circumstance in which it is possible to be desirable to balance between the precision and recall. An f1 score on the f1 scale of 0.9391 shows that the model worked as expected with similar efficiency rates for both positive and negative classes.
+Due to the fact that sentiment analysis usually determines weak distinctions between positive and negative values of the sentiment, high f1-score is needed for the model to be as proficient in the accurate definition of both the positive and negative sentiment.
+Accuracy is the ratio of all the actual positives that the model accurately flagged. With a recall of 0.9351, the model’s recall accuracy was 93.5 percent for all actual positive instances.
+This is special for the applications where true positives detection is important and as many of them as possible should be detected. For example, in sentiment analysis, neglecting a large body of positive reviews may result in the wrong trend on overall sentiment and therefore different sentiments taken into consideration.
+The assessments such as accuracy, precision, recall, and f1-score imply the fact that DistilBERT yields a high performance in binary sentiment classification. The evaluation metrics show that the model is not only precisely accurate, but also impartial as in it does not over emphasize any class of sentiment.
+The small validation loss increase by Epoch 3 is matched with gradually improving accuracy and f1-score, at which point it is possible that the model is beginning to overfit, but its overall generalization capability is sound. This minor kind of overfitting can be reduced if need be using other techniques like early stopping or including a dropout layer.
+
+Dataset	Your Averaged Score	DistilBERT Paper Score	Remarks
+SST-2	0.9171	0.917	Matches paper score
+Table 8. Comparison of average score
+
 
 # Reflections
 
 I, Nadun Chandrabahu, successfully replicated the evaluation results of DistilBERT on the SQuAD task, and explored the same metrics on McTest NLP question answering task. Although my EM scores were satisfactory, my F1 scores did not match up to expectations on both the SQuAD and MCTest question-answering tasks. This discrepancy may stem from an error in my method to F1 score calculation or could be due to the random errors in model predictions, which can notably impact the F1 score as True Positives, False Positives and False Negatives may be incorrectly counted.
 
 Vu Anh Tai Ho (Tai), has finished reevaluate the DistilBERT model on GLUE task, as well as new datasets with single sentence tasks (emotion) and similarity tasks (PAWS). The finding is the pretrained models can work really well with simple single sentence task, however, when the tasks get complicated like more labels, more reasoning or context understanding requirement, the DistilBERT model performs worse than expected. However, given its purpose of being a lightweight model, its performances can be sufficient for initial analysing and testing before the comprehensive and exhaustive tasks that required more complex model
+
+I, Muhammad Umer Bashir, Here this project showcased how DistilBERT remains performant even when the computations are optimized. Possible future work could take this study further by conducting the cross-domain experiment, or try using DistilBERT on other sentiment data sets, or by increasing the complexity of the SST-2 data set.
 
 # References
 
