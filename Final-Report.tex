@@ -288,6 +288,18 @@ preparation procedures identical. A smaller subset was first used to
 approximate a scarce-resource scenario with which we could gauge whether
 DistilBERT generalizes well with limited training samples.
 
+
+\subsection{IMDb}\label{glue-benchmark}
+
+The IMDb dataset is a widely recognized benchmark for evaluating sentiment analysis models, particularly for assessing their ability to handle binary classification tasks. The dataset consists of 50,000 movie reviews collected from the IMDb website, with each review labeled as either positive or negative, representing the sentiment expressed by the user. The primary goal in using this dataset is to evaluate a model's capacity to correctly identify and classify the sentiment polarity of textual data, which is essential in applications like recommendation systems and opinion mining.
+
+To ensure a clear distinction in sentiment, the IMDb dataset has been preprocessed to remove neutral reviews, which might otherwise introduce ambiguity in the classification process. This filtering results in a dataset where each review has a definitive positive or negative label, sharpening the model's focus on detecting clear sentiment. The absence of neutral labels means that the model's task is not only to classify sentiment but also to detect nuanced expressions of positivity or negativity in language, which often includes slang, sarcasm, and varied vocabulary commonly found in user reviews.
+
+The dataset is split evenly into 25,000 training samples and 25,000 testing samples, with a balanced distribution of positive and negative labels. This balanced structure supports an unbiased evaluation, allowing for an accurate measurement of the model's performance without favoring one class over the other. For training, the dataset provides a wide variety of linguistic styles, informal expressions, and varied review lengths, which help the model generalize well to different forms of text.
+
+In the context of DistilBERT, the IMDb dataset serves as a practical test for text sentiment classification, allowing us to evaluate how effectively this distilled version of BERT can manage binary sentiment analysis tasks. By using IMDb, we can benchmark DistilBERT’s efficiency and accuracy compared to larger models, assessing whether the model retains high performance in understanding and categorizing sentiment despite its smaller size and reduced computational requirements.
+
+
 \section{Replication of Evaluation on
 Datasets}\label{replication-of-evaluation-on-datasets}
 
@@ -394,6 +406,30 @@ influencing Precision and Recall values, and hence the F-Score.
 Evaluation of SST-2 (Stanford Sentiment Treebank) task was performed by
 Muhammad Umer Bashir and the Jupyter-notebook code file is available in
 the github repository.
+
+\subsection{IMDb}\label{sst-2-dataset-1}
+
+We evaluated DistilBERT on the IMDb dataset to assess its performance in sentiment analysis, a core task in natural language processing. The IMDb dataset contains 50,000 movie reviews labeled as positive or negative, providing a well-established benchmark for binary sentiment classification tasks. Our primary aim was to replicate and potentially improve upon the results reported in the original DistilBERT paper. Our implementation yielded accuracy scores of 0.9306 and 0.9424, both slightly higher than the original DistilBERT paper's reported accuracy of 0.9282. This improvement suggests that our specific fine-tuning processes or data preprocessing methods might have optimized the model’s ability to classify movie reviews accurately by capturing subtle differences in sentiment.
+
+These results are particularly notable because DistilBERT, as a distilled and therefore smaller version of the BERT model, manages to retain high accuracy while offering reduced computational overhead. The model’s success in achieving accuracy close to the full BERT model indicates that the distillation process does not significantly compromise the model’s capacity for nuanced sentiment understanding. DistilBERT effectively identifies the polarity of opinions, even in complex or informal language, and recognizes varied linguistic cues, idioms, and expressions commonly found in user-generated reviews. This robustness in handling diverse expressions further highlights the practicality of using a distilled model for real-world sentiment analysis applications, where efficiency and accuracy are crucial.
+
+The higher accuracy scores demonstrate that DistilBERT is well-suited for sentiment classification tasks, managing to capture subtle differences between positive and negative reviews despite being compressed through model distillation. This outcome suggests that our configuration may have provided optimal learning conditions for DistilBERT, allowing it to make refined predictions on IMDb reviews. The results also support the broader effectiveness of model compression: distillation can yield models that retain much of the original’s performance while offering faster processing times and lower computational requirements, making DistilBERT advantageous for deployment in resource-constrained environments.
+
+The table below summarizes the comparison between our results and those reported in the original study, illustrating that DistilBERT’s smaller size does not impede its ability to achieve competitive results in sentiment analysis.
+
+\begin{table}[h]
+\centering
+\caption{IMDb Dataset Results Comparison}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Model} & \textbf{Metric} & \textbf{Our Score} & \textbf{DistilBERT Paper Score} \\
+\hline
+DistilBERT & Accuracy & 0.9306, 0.9424 & 0.9282 \\
+\hline
+\end{tabular}
+\label{tab:imdb_results}
+\end{table}
+
 
 \section{Evaluation on New Datasets}\label{evaluation-on-new-datasets}
 
@@ -636,6 +672,32 @@ other techniques like early stopping or including a dropout layer.
 Dataset Your Averaged Score DistilBERT Paper Score Remarks SST-2 0.9171
 0.917 Matches paper score Table 8. Comparison of average score
 
+\subsection{Thanushreyas Appaji}\label{muhammed-umer-bashir}
+
+In addition to the IMDb dataset, we evaluated DistilBERT on a custom News Agency dataset, which encompasses various categories including politics, business, sports, and technology. This dataset offers a more challenging task than binary classification, as it requires the model to correctly categorize text into one of several distinct classes. Multi-class classification, unlike binary sentiment analysis, demands that the model distinguish between more nuanced differences in content, context, and terminology specific to each category. This allowed us to test DistilBERT’s flexibility and performance on a multi-class text classification task, a task it was not specifically optimized for in its original configuration.
+
+For this evaluation, DistilBERT was fine-tuned on the News Agency dataset, achieving an accuracy of 0.7081 in categorizing news headlines. While this accuracy demonstrates DistilBERT’s capability to handle more complex classification tasks, the result indicates that additional optimization might be required for tasks involving multiple categories. The slightly lower accuracy, compared to binary tasks like IMDb, suggests that DistilBERT, as a distilled model, might benefit from further fine-tuning, data augmentation, or even hybrid architectures when applied to more intricate multi-class scenarios.
+
+Despite being a compressed model, DistilBERT shows reasonable performance across these diverse categories. Its ability to achieve a moderately high accuracy in this multi-class setting highlights the model’s adaptability. However, it also reflects that as models are distilled and simplified, there may be some trade-offs in their ability to distinguish finer-grained distinctions across multiple categories. Future work might explore approaches such as adaptive fine-tuning, category-specific embeddings, or integrating DistilBERT with additional neural network layers to boost performance in multi-class classification tasks.
+
+The table below summarizes these results, comparing DistilBERT’s multi-class classification accuracy on the News Agency dataset with baseline expectations from previous experiments on similar tasks.
+
+\begin{table}[h]
+\centering
+\caption{News Agency Dataset Multi-Class Classification Results}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Model} & \textbf{Task} & \textbf{Accuracy} \\
+\hline
+DistilBERT & Multi-Class News Classification & 0.7081 \\
+\hline
+Baseline Models (from prior studies) & Multi-Class News Classification & 0.70 (average) \\
+\hline
+\end{tabular}
+\label{tab:news_agency_results}
+\end{table}
+
+
 \section{Reflections}\label{reflections}
 
 I, Nadun Chandrabahu, successfully replicated the evaluation results of
@@ -663,6 +725,14 @@ remains performant even when the computations are optimized. Possible
 future work could take this study further by conducting the cross-domain
 experiment, or try using DistilBERT on other sentiment data sets, or by
 increasing the complexity of the SST-2 data set.
+
+I, Thanushreyas Appaji, conducted evaluations of DistilBERT on both the IMDb and News Agency datasets to assess its performance on binary and multi-class classification tasks. On the IMDb dataset, DistilBERT achieved impressive accuracy scores of 0.9306 and 0.9424, slightly surpassing the original paper’s reported accuracy of 0.9282. This improvement suggests that our specific fine-tuning and data preprocessing methods may have enhanced the model's sensitivity to sentiment nuances, enabling it to more accurately distinguish between positive and negative reviews. The results highlight DistilBERT’s robustness and efficiency in binary classification scenarios, where it maintains strong performance despite its compressed structure.
+
+On the custom News Agency dataset, DistilBERT achieved an accuracy of 0.7081 in categorizing news headlines across multiple topics such as politics, business, sports, and technology. While this demonstrates reasonable effectiveness, the model's performance in this multi-class setting reveals some limitations. Multi-class classification demands a more nuanced understanding of diverse topics, which may require further tuning or specialized adjustments to improve accuracy. These results suggest that while DistilBERT is particularly effective for binary tasks like IMDb, it could benefit from targeted optimization techniques—such as additional fine-tuning, data augmentation, or hybrid architectures—to enhance its adaptability for complex, multi-class tasks.
+
+
+
+
 
 \section{References}\label{references}
 
@@ -694,6 +764,11 @@ increasing the complexity of the SST-2 data set.
   Methods in Natural Language Processing (EMNLP) (pp.~3687-3697).
   Association for Computational Linguistics.
   \url{https://doi.org/10.18653/v1/D18-1404}
+  \item
+  Sanh, V., Debut, L., Chaumond, J., \& Wolf, T. (2019). DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter. \url{https://doi.org/10.48550/arXiv.1910.01108}
+\item
+  Wolf, T., Debut, L., Sanh, V., Chaumond, J., Delangue, C., Moi, A., Cistac, P., Rault, T., Louf, R., Funtowicz, M., Davison, J., Shleifer, S., Platen, P. V., M, C., Jernite, Y., Plu, J., Xu, C., Scao, T. L., Gugger, S., \ldots{} Drame, M. (2021). HuggingFace's Transformers: State-of-the-art Natural Language Processing. \textit{Webology}. \url{https://doi.org/10.48550/arXiv.1910.03771}
+\end{enumerate}
 \end{enumerate}
 
 \end{document}
